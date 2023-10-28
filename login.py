@@ -36,7 +36,7 @@ def buscar_page():
     if parametro == "Fuente":
         fuente = st.text_input("")
     elif parametro == "Televisor":
-        televisor = st.text_input("")
+        televisor = st.selectbox("", df.televisor.values)
     elif parametro == "Numero":
         nro = st.number_input("",min_value=0, max_value=None , value= 0, step=1)
         
