@@ -1,17 +1,5 @@
 import streamlit as st
 import pandas as pd
-import requests
-from io import StringIO
-
-# URL del archivo en GitHub
-url = "https://raw.githubusercontent.com/e-navarro/placas.csv/main/placas.csv"
-
-# Descargar el contenido del archivo CSV
-response = requests.get(url)
-data = response.text
-
-# Leer el CSV desde el contenido descargado
-df = pd.read_csv(StringIO(data))
 
 # Página de inicio de sesiónimport streamlit as st
 
@@ -37,7 +25,7 @@ def usuario():
         editar_page()
         
 
-    df = pd.read_csv(StringIO(data))
+    df = pd.read_csv("placas.csv")
     st.subheader('Tabla de stocks')
     st.dataframe(df)
     
