@@ -57,7 +57,7 @@ def editar_page():
     df = edited_df
     
     if st.button("Editar"):
-        df.to_csv("placas2.csv", index= False)
+        df.to_csv("placas.csv", index= False)
         
 
 def main():
