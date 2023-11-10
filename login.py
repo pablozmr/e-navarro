@@ -58,8 +58,8 @@ def editar_page():
     
     df = edited_df
     
-    if st.button("Editar"):
-        df.to_csv('placas.csv', index= False)
+    if st.button("Guardar"):
+        df.to_csv("placas.csv", index= False)
         
 
 def main():
