@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 
-url = 'www.github.com/pablozmr/e-navarro/blob/main/placas.csv'
+
 # Página de inicio de sesiónimport streamlit as st
 
 # Página de inicio de sesión
@@ -27,13 +27,13 @@ def usuario():
         editar_page()
         
 
-    df = pd.read_csv(url)
+    df = pd.read_csv('placas.csv')
     st.subheader('Tabla de stocks')
     st.dataframe(df)
     
     
 def buscar_page():
-    df = pd.read_csv(url)
+    df = pd.read_csv('placas.csv')
     parametro = st.selectbox('Seleccione por cual parametro desea buscar', ("Fuente", "Televisor", "Numero"))
     if parametro == "Fuente":
         fuente = st.text_input("")
@@ -52,14 +52,14 @@ def buscar_page():
             st.dataframe(df.loc[df['nro'] == nro])
 
 def editar_page():
-    df = pd.read_csv(url)
+    df = pd.read_csv('placas.csv')
     st.column_config.TextColumn("fuente")
     edited_df = st.data_editor(df, num_rows="dynamic")
     
     df = edited_df
     
     if st.button("Editar"):
-        df.to_csv(url, index= False)
+        df.to_csv('placas.csv', index= False)
         
 
 def main():
