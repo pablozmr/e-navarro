@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import requests
+from io import StringIO
 
 # URL del archivo en GitHub
 url = "https://raw.githubusercontent.com/e-navarro/placas.csv/main/placas.csv"
