@@ -68,7 +68,8 @@ def editar_page():
             repo = git.Repo(local_path)
             repo.index.add(["placas.csv"])
             repo.index.commit("Actualización de archivo CSV")
-            repo.remote().push()
+            repo.remotes.origin.pull()
+            repo.remotes.origin.push()
             
             st.success("Repositorio existente abierto con éxito.")
         
