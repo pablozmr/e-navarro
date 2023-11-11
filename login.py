@@ -66,7 +66,7 @@ def editar_page():
         try:
             # Intenta abrir el repositorio existente
             repo = git.Repo(local_path)
-            repo.index.add([csv_file_name])
+            repo.index.add(["placas.csv"])
             repo.index.commit("Actualización de archivo CSV")
             repo.remote().push()
             
