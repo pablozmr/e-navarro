@@ -54,9 +54,9 @@ def editar_page():
     st.column_config.TextColumn("fuente")
     df_new = pd.DataFrame(
     [
-       {"fuente": "", "televisor": "", "numero": ""},
-       {"fuente": "", "televisor": "", "numero": ""},
-       {"fuente": "", "televisor": "", "numero": ""},
+       {"fuente": "", "televisor": "", "nro": ""},
+       {"fuente": "", "televisor": "", "nro": ""},
+       {"fuente": "", "televisor": "", "nro": ""},
    ]
 )
     edited_df = st.data_editor(df_new, num_rows="dynamic")
