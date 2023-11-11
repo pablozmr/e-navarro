@@ -54,32 +54,9 @@ def editar_page():
     st.column_config.TextColumn("fuente")
     edited_df = st.data_editor(df, num_rows="dynamic")
     
-    
-    
     if st.button("Guardar"):
-        edited_df.to_csv("placas.csv", index= False)
-        #URL del repositorio de GitHub
-        repo_url = "https://github.com/pablozmr/e-navarro.git"
-        local_path = "local_path"
-        
-        # Manejo de excepciones para clonar o abrir el repositorio
-        try:
-            # Intenta abrir el repositorio existente
-            repo = git.Repo(local_path)
-            repo.index.add(["placas.csv"])
-            repo.index.commit("Actualización de archivo CSV")
-            repo.remotes.origin.pull()
-            repo.remotes.origin.push()
-            
-            st.success("Repositorio existente abierto con éxito.")
-        
-        except git.exc.NoSuchPathError:
-            # Si el repositorio no existe, clónalo
-            repo = git.Repo.clone_from(repo_url, local_path)
-            st.success("Repositorio clonado con éxito.")
-        
-        except git.exc.InvalidGitRepositoryError:
-            st.error(f"Error: {local_path} no es un repositorio Git válido.")
+        df = edited_df
+        df.to_csv("placas.csv", index= False)
 
 def main():
     
