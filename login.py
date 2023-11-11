@@ -66,6 +66,10 @@ def editar_page():
         try:
             # Intenta abrir el repositorio existente
             repo = git.Repo(local_path)
+            repo.index.add([csv_file_name])
+            repo.index.commit("Actualización de archivo CSV")
+            repo.remote().push()
+            
             st.success("Repositorio existente abierto con éxito.")
         
         except git.exc.NoSuchPathError:
