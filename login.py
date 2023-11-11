@@ -52,20 +52,12 @@ def buscar_page():
 def editar_page():
     df = pd.read_csv("placas.csv")
     st.column_config.TextColumn("fuente")
-    df_new = pd.DataFrame(
-    [
-       {"fuente": "", "televisor": "", "nro": ""},
-       {"fuente": "", "televisor": "", "nro": ""},
-       {"fuente": "", "televisor": "", "nro": ""},
-   ]
-)
-    edited_df = st.data_editor(df_new, num_rows="dynamic")
+    edited_df = st.data_editor(df, num_rows="dynamic")
     
     
     
     if st.button("Guardar"):
-        df = pd.concat([df, edited_df], ignore_index=True)
-        df.to_csv("placas.csv", index= False)
+        edited_df.to_csv("placas.csv", index= False)
         
 
 def main():
