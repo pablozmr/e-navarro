@@ -58,21 +58,23 @@ def editar_page():
     
     if st.button("Guardar"):
         edited_df.to_csv("placas.csv", index= False)
-        # URL del repositorio de GitHub
+        #URL del repositorio de GitHub
         repo_url = "https://github.com/pablozmr/e-navarro.git"
+        local_path = "local_path"
         
-        # Intenta clonar el repositorio y maneja los errores
+        # Manejo de excepciones para clonar o abrir el repositorio
         try:
-            # Clonar el repositorio localmente
-            # URL del repositorio de GitHub
-            repo = git.Repo.clone_from(repo_url, "local_path")
-            repo.index.add([csv_file_name])
-            repo.index.commit("Actualización de archivo CSV")
-            repo.remote().push()
-        except git.exc.GitCommandError as e:
-            st.error(f"Error al clonar el repositorio: {e}")
-            # Puedes agregar más información de depuración aquí
-            raise e  # Esto mostrará la traza completa del error en el registro
+            # Intenta abrir el repositorio existente
+            repo = git.Repo(local_path)
+            st.success("Repositorio existente abierto con éxito.")
+        
+        except git.exc.NoSuchPathError:
+            # Si el repositorio no existe, clónalo
+            repo = git.Repo.clone_from(repo_url, local_path)
+            st.success("Repositorio clonado con éxito.")
+        
+        except git.exc.InvalidGitRepositoryError:
+            st.error(f"Error: {local_path} no es un repositorio Git válido.")
 
 def main():
     
