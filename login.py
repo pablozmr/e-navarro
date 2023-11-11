@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import git
 
 # Página de inicio de sesiónimport streamlit as st
 
@@ -24,6 +25,11 @@ def usuario():
     elif add_selectbox == "Añadir / Editar":
         editar_page()
         
+    # URL del repositorio de GitHub
+    repo_url = "https://github.com/pablozmr/e-navarro.git"
+
+    # Clonar el repositorio localmente
+    repo = git.Repo.clone_from(repo_url, "local_path")
 
     df = pd.read_csv("placas.csv")
     st.subheader('Tabla de stocks')
@@ -58,6 +64,11 @@ def editar_page():
     
     if st.button("Guardar"):
         df.to_csv("placas.csv", index= False)
+        repo.index.add(["placas.csv"])
+        repo.index.commit("Actualización de archivo CSV")
+        repo.remote().push()
+
+        st.success("Cambios guardados exitosamente en GitHub!")
         
 
 def main():
