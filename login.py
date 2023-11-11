@@ -24,12 +24,6 @@ def usuario():
         buscar_page()
     elif add_selectbox == "Añadir / Editar":
         editar_page()
-        
-    # URL del repositorio de GitHub
-    repo_url = "https://github.com/pablozmr/e-navarro.git"
-
-    # Clonar el repositorio localmente
-    repo = git.Repo.clone_from(repo_url, "local_path")
 
     df = pd.read_csv("placas.csv")
     st.subheader('Tabla de stocks')
@@ -58,17 +52,19 @@ def buscar_page():
 def editar_page():
     df = pd.read_csv("placas.csv")
     st.column_config.TextColumn("fuente")
-    edited_df = st.data_editor(df, num_rows="dynamic")
+    df_new = pd.DataFrame(
+    [
+       {"fuente": "", "televisor": "", "numero": ""},
+       {"fuente": "", "televisor": "", "numero": ""},
+       {"fuente": "", "televisor": "", "numero": ""},
+   ]
+)
+    edited_df = st.data_editor(df_new, num_rows="dynamic")
     
-    df = edited_df
+    df = pd.concat([df, edited_df], axis=0)
     
     if st.button("Guardar"):
         df.to_csv("placas.csv", index= False)
-        repo.index.add(["placas.csv"])
-        repo.index.commit("Actualización de archivo CSV")
-        repo.remote().push()
-
-        st.success("Cambios guardados exitosamente en GitHub!")
         
 
 def main():
