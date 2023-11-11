@@ -58,7 +58,21 @@ def editar_page():
     
     if st.button("Guardar"):
         edited_df.to_csv("placas.csv", index= False)
+        # URL del repositorio de GitHub
+        repo_url = "https://github.com/pablozmr/e-navarro.git"
         
+        # Intenta clonar el repositorio y maneja los errores
+        try:
+            # Clonar el repositorio localmente
+            # URL del repositorio de GitHub
+            repo = git.Repo.clone_from(repo_url, "local_path")
+            repo.index.add([csv_file_name])
+            repo.index.commit("Actualización de archivo CSV")
+            repo.remote().push()
+        except git.exc.GitCommandError as e:
+            st.error(f"Error al clonar el repositorio: {e}")
+            # Puedes agregar más información de depuración aquí
+            raise e  # Esto mostrará la traza completa del error en el registro
 
 def main():
     
