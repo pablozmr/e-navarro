@@ -61,7 +61,7 @@ def editar_page():
 )
     edited_df = st.data_editor(df_new, num_rows="dynamic")
     
-    df = pd.concat([df, edited_df], axis=0)
+    df = df.append(edited_df, ignore_index=True)
     
     if st.button("Guardar"):
         df.to_csv("placas.csv", index= False)
