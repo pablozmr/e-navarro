@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import git
 
 # Página de inicio de sesiónimport streamlit as st
 
@@ -24,8 +23,9 @@ def usuario():
         buscar_page()
     elif add_selectbox == "Añadir / Editar":
         editar_page()
+        
 
-    df = pd.read_csv("placas.csv")
+    df = pd.read_csv('placas.csv')
     st.subheader('Tabla de stocks')
     st.dataframe(df)
     
@@ -54,9 +54,11 @@ def editar_page():
     st.column_config.TextColumn("fuente")
     edited_df = st.data_editor(df, num_rows="dynamic")
     
-    if st.button("Guardar"):
-        df = edited_df
+    df = edited_df
+    
+    if st.button("Editar"):
         df.to_csv("placas.csv", index= False)
+        
 
 def main():
     
