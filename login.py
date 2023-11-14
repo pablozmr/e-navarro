@@ -1,20 +1,13 @@
 import streamlit as st
 import pandas as pd
-
+import gspread
 # Página de inicio de sesiónimport streamlit as st
-
+gc = gspread.service_account(filename='clase.json')
+sht2 = gc.open_by_url('https://docs.google.com/spreadsheets/d/10kOz5eGToPogxndeAmXizvdGszqaD-Zin9mO5yoMNK0/edit?usp=sharing')
+worksheet = sht2.get_worksheet(0)
+list_of_dicts = worksheet.get_all_records()
+df = pd.DataFrame(list_of_dicts)
 # Página de inicio de sesión
-def login():
-    st.write("¡Bienvenido al sistema!.")
-    
-    st.title("Inicia sesion:")
-    user = st.text_input("Usuario: ")
-    password = st.text_input("Password: ", type= "password")
-    if st.button("Iniciar Sesión"):
-        if user == "usuario" and password == "password":
-            st.success("Inicio de sesión correcto.")
-            
-            return True
     
 def usuario():
     add_selectbox = st.sidebar.selectbox("Que desea hacer?",
@@ -24,14 +17,10 @@ def usuario():
     elif add_selectbox == "Añadir / Editar":
         editar_page()
         
-
-    df = pd.read_csv('placas.csv')
-    st.subheader('Tabla de stocks')
-    st.dataframe(df)
     
     
 def buscar_page():
-    df = pd.read_csv("placas.csv")
+    df = pd.DataFrame(list_of_dicts)
     parametro = st.selectbox('Seleccione por cual parametro desea buscar', ("Fuente", "Televisor", "Numero"))
     if parametro == "Fuente":
         fuente = st.text_input("")
@@ -50,17 +39,19 @@ def buscar_page():
             st.dataframe(df.loc[df['nro'] == nro])
 
 def editar_page():
-    df = pd.read_csv("placas.csv")
+    df = pd.DataFrame(list_of_dicts)
     st.column_config.TextColumn("fuente")
     edited_df = st.data_editor(df, num_rows="dynamic")
     
     df = edited_df
     
     if st.button("Editar"):
-        df.to_csv("placas.csv", index= False)
-        
+        worksheet.update([df.columns.values.tolist()] + df.values.tolist())
+
+    
 
 def main():
+    
     
     st.title('Electronica Navarro')
     
@@ -76,6 +67,5 @@ if __name__ == "__main__":
 
 
 
-    
     
     
