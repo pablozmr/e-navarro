@@ -4,7 +4,7 @@ import gspread
 
 # Config pag
 st.set_page_config(
-    page_title="Invitado e-Navarro",
+    page_title="Inv e-Navarro",
     page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded")
