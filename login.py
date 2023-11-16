@@ -70,7 +70,7 @@ def editar_page():
     df = pd.DataFrame(list_of_dicts)
     edited_df = st.data_editor(df, num_rows= "dynamic", hide_index=True)
     df = edited_df
-    st.write("Si el codigo de la placa no tiene *letraS* en el, agregale una 'N' antes o un ' - ' despues")
+    st.write("Si el codigo de la placa no tiene **letras** en el, agregale una 'N' antes o un ' - ' despues")
     
     if st.button("Actualizar"):
         
