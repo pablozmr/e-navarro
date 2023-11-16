@@ -49,11 +49,17 @@ def buscar_page():
     
     if st.button('Buscar'):
         if parametro == "Fuente":
-            st.dataframe(df.loc[df['fuente'] == fuente])
+            if fuente == "":
+                st.write("El casillero esta vacio.")
+            else:
+                st.dataframe(df.loc[df['fuente'] == fuente])
         elif parametro == "Televisor":
             st.dataframe(df.loc[df['televisor'] == televisor])
         elif parametro == "Numero":
-            st.dataframe(df.loc[df['nro'] == nro])
+            if nro == 0:
+                st.write("Elija un numero distinto de 0.")
+            else:
+                st.dataframe(df.loc[df['nro'] == nro])
 
 def editar_page():
     df = pd.DataFrame(list_of_dicts)
