@@ -1,6 +1,13 @@
 import streamlit as st
 import pandas as pd
 import gspread
+
+# Config pag
+st.set_page_config(
+    page_title="Invitado e-Navarro",
+    page_icon="⚡",
+    layout="wide",
+    initial_sidebar_state="expanded")
 # Página de inicio de sesiónimport streamlit as st
 credentials = {
         "type": "service_account",
