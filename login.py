@@ -1,7 +1,12 @@
 import streamlit as st
 import pandas as pd
 import gspread
-# Página de inicio de sesiónimport streamlit as st
+# Configuracion pag
+st.set_page_config(
+    page_title="e-Navarro",
+    page_icon="⚡",
+    layout="wide",
+    initial_sidebar_state="expanded")
 
 # Página de inicio de sesión
 credentials = {
