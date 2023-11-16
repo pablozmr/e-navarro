@@ -60,6 +60,10 @@ def editar_page():
     edited_df = st.data_editor(df, num_rows= "dynamic", hide_index=True)
     df = edited_df
     if st.button("Actualizar"):
+        df.placa = df['televisor'].apply(lambda x: " " if pd.isnull(x) else x)
+        df.televisor = df['televisor'].apply(lambda x: " " if pd.isnull(x) else x)
+        df.nro = df['nro'].apply(lambda x: 0 if pd.isnull(x) else x)
+        df.caja = df['caja'].apply(lambda x: 0 if pd.isnull(x) else x)
         worksheet.update([df.columns.values.tolist()] + df.values.tolist())
         st.rerun()
         
